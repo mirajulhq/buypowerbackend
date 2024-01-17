@@ -32,8 +32,8 @@ class AuthController extends Controller
                 ], 422);
             } else {
                 try {
-                    $user = User::where('email', $request->email)->first();
                     if ($request->type === 'manual') {
+                        $user = User::where('email', $request->email)->where('is_active', true)->first();
                         if (
                             $user &&
                             Hash::check($request->password, $user->password)
