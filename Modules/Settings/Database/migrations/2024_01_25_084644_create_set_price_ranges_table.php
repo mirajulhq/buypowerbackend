@@ -11,19 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('set_price_ranges', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
+            $table->decimal('max_price', $precision = 8, $scale = 2)->nullable();
+            $table->decimal('min_price', $precision = 8, $scale = 2)->nullable();
             $table->boolean('is_active')->default(true);
             $table->bigInteger('location_id')->unsigned()->nullable();
             $table->foreign('location_id')->references('id')->on('set_locations');
+            $table->bigInteger('create_user_id')->unsigned()->nullable();
+            $table->foreign('create_user_id')->references('id')->on('users');
+            $table->bigInteger('edit_user_id')->unsigned()->nullable();
+            $table->foreign('edit_user_id')->references('id')->on('users');
             $table->softDeletes($column = 'deleted_at', $precision = 0);
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('set_price_ranges');
     }
 };
