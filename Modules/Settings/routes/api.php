@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Modules\Settings\App\Http\Controllers\PriceRangeController;
+use Modules\Settings\App\Http\Controllers\SuburbController;
 
 /*
     |--------------------------------------------------------------------------
@@ -14,6 +16,14 @@ use Illuminate\Support\Facades\Route;
     |
 */
 
+// Route::middleware(['auth:sanctum'])->prefix('v1')->name('api.')->group(function () {
+//     Route::get('settings', fn (Request $request) => $request->user())->name('settings');
+// });
 Route::middleware(['auth:sanctum'])->prefix('v1')->name('api.')->group(function () {
     Route::get('settings', fn (Request $request) => $request->user())->name('settings');
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::resource('suburb', SuburbController::class);
+    Route::resource('price/range', PriceRangeController::class);
 });

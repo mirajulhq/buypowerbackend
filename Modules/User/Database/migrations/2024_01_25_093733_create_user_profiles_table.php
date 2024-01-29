@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
             $table->text('address')->nullable();
+            $table->string('lattitude')->nullable();
+            $table->string('longtitude')->nullable();
+            $table->integer('move_in_month')->nullable();
+            $table->date('move_in')->nullable();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->boolean('is_active')->default(true);

@@ -20,8 +20,6 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->bigInteger('location_id')->unsigned()->nullable();
-            $table->foreign('location_id')->references('id')->on('set_locations');
             $table->softDeletes($column = 'deleted_at', $precision = 0);
             $table->rememberToken();
             $table->timestamps();

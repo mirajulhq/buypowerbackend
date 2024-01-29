@@ -54,7 +54,8 @@ class GeocodingController extends Controller
         }
 
         // Return the region information
-        return response()->json(['region' => $regionInfo]);
+        // return response()->json(['region' => $regionInfo]);
+        return $regionInfo;
     }
     /**
      * Display a listing of the resource.

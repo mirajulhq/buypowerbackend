@@ -14,6 +14,10 @@ class SetState extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [];
+
+    public function suburb () {
+        return $this->hasMany(SetSuburb::class, 'state_id', 'id');
+    }
     
     protected static function newFactory(): SetStateFactory
     {
